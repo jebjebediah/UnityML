@@ -169,7 +169,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 3bca934d51b90014ea8f6bc6238ca944, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 86a85ab5516550a4c98eff8e09b00aa3, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: MoverCube
