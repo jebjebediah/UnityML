@@ -18,8 +18,9 @@ public class MoverAgentTrain : Agent
     void Update() {
         episodeTime += Time.deltaTime;
 
+        // Penalize getting stuck for a long time (usually due to getting stuck on the obstacles)
         if (episodeTime > 60) { 
-            SetReward(0.0f);
+            SetReward(-1f);
             EndEpisode(); 
         }
     }
@@ -81,12 +82,6 @@ public class MoverAgentTrain : Agent
             EndEpisode();
         }
 
-        // else if (distanceToObstacle < 1.00f)
-        // {
-        //    SetReward(0.0f);
-        //    EndEpisode();
-        //}
-
         // Fell off platform
         else if (this.transform.localPosition.y < 0)
         {
@@ -99,5 +94,13 @@ public class MoverAgentTrain : Agent
         var continuousActionsOut = actionsOut.ContinuousActions;
         continuousActionsOut[0] = Input.GetAxis("Horizontal");
         continuousActionsOut[1] = Input.GetAxis("Vertical");
+    }
+
+    public void OnColisionEnter(Collision collision)
+    {
+        // Penalize contact with the obstacles
+        if (collision.gameObject.name == "Obstacle1" || collision.gameObject.name == "Obstacle2") {
+            AddReward(-0.25f);
+        }
     }
 }

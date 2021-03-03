@@ -2,23 +2,23 @@
     "MoverCube": {
         "checkpoints": [
             {
-                "steps": 499978,
-                "file_path": "results\\MoverCube\\MoverCube\\MoverCube-499978.onnx",
-                "reward": 0.8,
-                "creation_time": 1614694217.792438
+                "steps": 499993,
+                "file_path": "results\\MoverCube\\MoverCube\\MoverCube-499993.onnx",
+                "reward": 1.0,
+                "creation_time": 1614738434.7771869
             },
             {
-                "steps": 500175,
-                "file_path": "results\\MoverCube\\MoverCube\\MoverCube-500175.onnx",
-                "reward": 0.8181818181818182,
-                "creation_time": 1614694217.8414493
+                "steps": 500055,
+                "file_path": "results\\MoverCube\\MoverCube\\MoverCube-500055.onnx",
+                "reward": 1.0,
+                "creation_time": 1614738434.8301988
             }
         ],
         "final_checkpoint": {
-            "steps": 500175,
+            "steps": 500055,
             "file_path": "results\\MoverCube\\MoverCube.onnx",
-            "reward": 0.8181818181818182,
-            "creation_time": 1614694217.8414493
+            "reward": 1.0,
+            "creation_time": 1614738434.8301988
         }
     },
     "metadata": {

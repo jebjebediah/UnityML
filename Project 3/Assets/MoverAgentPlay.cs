@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
@@ -18,8 +19,9 @@ public class MoverAgentPlay : Agent
     void Update() {
         episodeTime += Time.deltaTime;
 
+        // Penalize getting stuck for a long time (usually due to getting stuck on the obstacles)
         if (episodeTime > 60) { 
-            SetReward(0.0f);
+            SetReward(-1f);
             EndEpisode(); 
         }
     }
@@ -29,8 +31,6 @@ public class MoverAgentPlay : Agent
     public Transform Obstacle2;
     public override void OnEpisodeBegin()
     {
-        StartCoroutine(waitAtBegin());
-
         // If the Agent fell, zero its momentum
         if (this.transform.localPosition.y < 0)
         {
@@ -41,8 +41,9 @@ public class MoverAgentPlay : Agent
 
         this.episodeTime = 0.0f;
 
-        //Move the target to a new spot
-        Target.localPosition = new Vector3(UnityEngine.Random.value * 8 - 4, 0.5f, UnityEngine.Random.value * 8 - 4);
+        this.transform.localPosition = new Vector3(UnityEngine.Random.value * 8 - 4, 0.5f, UnityEngine.Random.value * 8 - 4);
+
+        //Move the obstacles to new spots
         Obstacle1.localPosition = new Vector3(UnityEngine.Random.value * 8 - 4, 0.5f, UnityEngine.Random.value * 8 - 4);
         Obstacle2.localPosition = new Vector3(UnityEngine.Random.value * 8 - 4, 0.5f, UnityEngine.Random.value * 8 - 4);
     }
@@ -83,12 +84,6 @@ public class MoverAgentPlay : Agent
             EndEpisode();
         }
 
-        // else if (distanceToObstacle < 1.00f)
-        // {
-        //    SetReward(0.0f);
-        //    EndEpisode();
-        //}
-
         // Fell off platform
         else if (this.transform.localPosition.y < 0)
         {
@@ -103,8 +98,17 @@ public class MoverAgentPlay : Agent
         continuousActionsOut[1] = Input.GetAxis("Vertical");
     }
 
-    IEnumerator waitAtBegin()
+    IEnumerator<UnityEngine.WaitForSeconds> waitAtBegin()
     {
-        yield return new WatiForSeconds(1.0f);
+        yield return new WaitForSeconds(1);
+        Debug.Log("Wait over");
+    }
+
+    public void OnColisionEnter(Collision collision)
+    {
+        // Penalize contact with the obstacles
+        if (collision.gameObject.name == "Obstacle1" || collision.gameObject.name == "Obstacle2") {
+            AddReward(-0.25f);
+        }
     }
 }

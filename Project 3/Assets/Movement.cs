@@ -17,6 +17,6 @@ public class Movement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        gameObject.transform.position = new Vector3(transform.position.x + (x * speed), 0.5f, transform.position.z + (z * speed));
+        gameObject.transform.position = new Vector3(Mathf.Clamp(transform.position.x + (x * speed), -5.0f, 5.0f), 0.5f, Mathf.Clamp(transform.position.z + (z * speed), -5.0f, 5.0f));
     }
 }
