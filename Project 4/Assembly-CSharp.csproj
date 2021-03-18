@@ -55,9 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Movement.cs" />
-     <Compile Include="Assets\MoverAgentPlay.cs" />
-     <Compile Include="Assets\MoverAgentTrain.cs" />
+     <Compile Include="Assets\CoinManager.cs" />
+     <Compile Include="Assets\CollectorAgentTrain.cs" />
+     <None Include="Assets\BrokenVector\LowPolyShaders\Shaders\LowPolyUnlitShader.shader" />
+     <None Include="Assets\BrokenVector\LowPolyShaders\Shaders\LowPolyPBRShader.shader" />
+     <None Include="Assets\BrokenVector\LowPolyTreePack\README.txt" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/2019.4.21f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
